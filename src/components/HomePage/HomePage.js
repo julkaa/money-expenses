@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import NewExpense from "../NewExpense/NewExpense";
 import Expenses from "../Expenses/Expenses";
 
 import styles from './HomePage.module.css'
@@ -20,7 +19,7 @@ function HomePage() {
             <Header/>
             {/*<PostDetails><p>Haha Modal</p></PostDetails>*/}
             <header className={styles['App-header']} color="primary">
-                <NewExpense onAddExpense={addExpenseHandler}/>
+                {/*<NewExpense onAddExpense={addExpenseHandler}/>*/}
                 <Expenses items={expenses}/>
             </header>
 

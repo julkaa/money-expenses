@@ -13,6 +13,7 @@ import axios from 'axios';
 import styles from './LoginPage.module.css'
 import {useAuth} from "../../Hooks/useContext";
 import {useNavigate} from "react-router-dom";
+import {fetchExpenses} from "../../shared/fetchExpense";
 
 function LoginPage() {
     const [username, setUsername] = useState('username');
@@ -35,6 +36,7 @@ function LoginPage() {
             });
             if (response.data.value === true) {
                 toggleLogin();
+                fetchExpenses();
                 navigate('/list');
             }
 
@@ -103,7 +105,7 @@ function LoginPage() {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        color="primary"
+                        className={styles['sign-btn']}
                     >
                         Sign In
                     </Button>

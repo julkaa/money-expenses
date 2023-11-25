@@ -1,6 +1,10 @@
 .header {
-    background: radial-gradient(#303b37, #1a1f1d);
+    background: #CAD2C5;
     padding: 1rem;
+}
+
+.btn {
+    background-color: #2F3E46 !important;
 }
 
 .new-expense button {
@@ -33,4 +37,5 @@
 
 .btn-logout {
     float: right;
+    background-color: #2F3E46 !important;
 }

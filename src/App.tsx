@@ -18,7 +18,7 @@ function App() {
                         {/* Private Routes */}
                         <Route element={<PrivateRoutes/>}>
                             <Route path={"/list"} element={<HomePage/>}/>
-                            <Route path={"/list/create-expenses"} element={<HomePage/>}/>
+                            <Route path={"/list/edit/:id"} element={<HomePage/>}/>
                         </Route>
 
                         {/* Public Routes */}

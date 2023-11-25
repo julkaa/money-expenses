@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import './ExpenseForm.css'
+import styles from './ExpenseForm.module.css'
 import {InputAdornment, OutlinedInput, TextField} from "@mui/material";
 
 const ExpenseForm = (props: any) => {
@@ -32,14 +32,13 @@ const ExpenseForm = (props: any) => {
     }
 
 
-    // @ts-ignore
     return (
         <form onSubmit={submitHandler}>
-            <div className="new-expense__controls">
-                <div className="new-expense__control">
+            <div className={styles['new-expense__controls']}>
+                <div className={styles['new-expense__control']}>
                     <label>Title</label>
                     <TextField
-                        className='input'
+                        className={styles.input}
                         variant="outlined"
                         margin="normal"
                         required
@@ -48,10 +47,10 @@ const ExpenseForm = (props: any) => {
                         onChange={titleChangeHandler}
                     />
                 </div>
-                <div className="new-expense__control">
+                <div className={styles['new-expense__control']}>
                     <label>Amount</label>
                     <OutlinedInput
-                        className='input'
+                        className={styles.input}
                         id="outlined-adornment-amount"
                         startAdornment={<InputAdornment position="start">$</InputAdornment>}
                         required
@@ -59,14 +58,14 @@ const ExpenseForm = (props: any) => {
                         onChange={amountChangeHandler}
                     />
                 </div>
-                <div className="new-expense__control">
+                <div className={styles['new-expense__control']}>
                     <label>Date</label>
                     {/*<input type="date" min="2022-01-01" max="2023-09-01" onChange={(event) => {inputChangeHandler('date', event.target.value)}}/>*/}
                     <input type="date" min="2020-01-01" max="2023-09-01" value={enteredDate}
                            onChange={dateChangeHandler}/>
                 </div>
             </div>
-            <div className="new-expense__actions">
+            <div className={styles['new-expense__actions']}>
                 <button type='button' onClick={props.onCancel}>Cancel</button>
                 <button type="submit">Add Expense</button>
             </div>

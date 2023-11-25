@@ -1,4 +1,4 @@
-export const DEFAULT_EXPENSES = [
+const DEFAULT_EXPENSES = [
     {
         id: 'e1',
         title: 'Watch',
@@ -26,9 +26,10 @@ export const DEFAULT_EXPENSES = [
     },
 ];
 
-export function fetchExpenses() {
+function fetchExpenses() {
     if (!localStorage.getItem('expenses')?.length) {
         localStorage.setItem('expenses', JSON.stringify(DEFAULT_EXPENSES));
     }
 }
 
+export {fetchExpenses, DEFAULT_EXPENSES}
