@@ -17,13 +17,14 @@ const useAuth = () => {
 
 const AuthProvider = ({children}) => {
     const [isLoggedIn, setIsLoggedIn] = useState(
-        () => localStorage.getItem('isLoggedIn') === 'false'
+        () => localStorage.getItem('isLoggedIn') === 'true'
     );
 
     const toggleLogin = () => {
         setIsLoggedIn((prevIsLoggedIn) => {
-            localStorage.setItem('isLoggedIn', String(prevIsLoggedIn));
-            return !prevIsLoggedIn;
+            const newIsLoggedIn = !prevIsLoggedIn;
+            localStorage.setItem('isLoggedIn', String(newIsLoggedIn));
+            return newIsLoggedIn;
         });
     };
 

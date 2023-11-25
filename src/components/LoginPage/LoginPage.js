@@ -26,8 +26,8 @@ function LoginPage() {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
         try {
             const response = await axios.post('http://localhost:4000/login', {
                 username,
@@ -35,7 +35,7 @@ function LoginPage() {
             });
             if (response.data.value === true) {
                 toggleLogin();
-                // navigate('/home');
+                navigate('/list');
             }
 
         } catch (error) {

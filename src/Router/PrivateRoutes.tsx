@@ -1,11 +1,11 @@
-import {Navigate} from "react-router-dom";
+import {Navigate, Outlet} from "react-router-dom";
 import {FC} from "react";
-import HomePage from "../components/HomePage/HomePage";
+import {useAuth} from "../Hooks/useContext";
 
 const PrivateRoutes: FC = () => {
-    console.log(localStorage.getItem('isLoggedIn'));
+    const {isLoggedIn} = useAuth();
     return (
-        localStorage.getItem('isLoggedIn') ? <HomePage/> : <Navigate to="/login"/>
+        isLoggedIn ? <Outlet/> : <Navigate to={"login"}/>
     );
 };
 

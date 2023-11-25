@@ -17,16 +17,6 @@ const ExpenseForm = (props: any) => {
         setEnteredDate(event.target.value);
     }
 
-    const inputChangeHandler = (identifier: string, value: string) => {
-        if (identifier === 'title') {
-            setEnteredTitle(value);
-        } else if (identifier === 'date') {
-            setEnteredDate(value);
-        } else {
-            setEnteredAmount(value);
-        }
-    }
-
     const submitHandler = (event: any) => {
         event.preventDefault();
         const expenseData = {

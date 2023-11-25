@@ -30,3 +30,7 @@
 .new-expense button.alternative:active {
     background-color: #ddb3f8;
 }
+
+.btn-logout {
+    float: right;
+}
