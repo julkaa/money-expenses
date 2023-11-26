@@ -1,17 +1,25 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from './Header.module.css'
-import {Button, Container} from "@mui/material";
+import {Button} from "@mui/material";
 import {useAuth} from "../../Hooks/useContext";
 import Modal from "../UI/Modal";
 import Form from "../UI/Form";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const Header = () => {
     const {toggleLogin} = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
     const [showModal, setShowModal] = useState(false);
 
+    useEffect(() => {
+        if (location.pathname === '/list/create-expense') {
+            setShowModal(true);
+        }
+    }, [location.pathname]);
+
     const handleNewExpense = () => {
+        navigate('/list/create-expense');
         setShowModal(true);
     };
     const handleLogout = () => {
@@ -28,8 +36,8 @@ const Header = () => {
     }
 
     return (
-        <>{showModal && <Modal><Form item={[]} onCancel={closeHandler} onSave={editHandler}/></Modal>}
-            <Container className={styles.header}>
+        <>{showModal && <Modal><Form item={[]} onCancel={closeHandler} onSubmit={editHandler}/></Modal>}
+            <div className={styles.header}>
                 <Button
                     type="submit"
                     variant="contained"
@@ -46,7 +54,7 @@ const Header = () => {
                 >
                     Log Out
                 </Button>
-            </Container>
+            </div>
         </>
     )
 }

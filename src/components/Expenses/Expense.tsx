@@ -1,13 +1,13 @@
 import React, {useState} from "react";
-import styles from './ExpenseItem.module.css'
 import ExpenseDate from "./ExpenseDate";
 import Card from "../UI/Card";
 import {Button} from "@mui/material";
 import Modal from "../UI/Modal";
 import Form from "../UI/Form";
 import {useNavigate} from "react-router-dom";
+import styles from './Expense.module.css'
 
-const ExpenseItem = (props: any) => {
+const Expense = (props: any) => {
     const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
 
@@ -24,11 +24,10 @@ const ExpenseItem = (props: any) => {
     function closeHandler() {
         setShowModal(false);
         navigate('/list');
-        // Remove 'create-item' from the URL when modal is closed
     }
 
     return (
-        <>{showModal && <Modal><Form item={props} onCancel={closeHandler} onSave={editHandler}/></Modal>}
+        <>{showModal && <Modal><Form item={props} onCancel={closeHandler} onSubmit={editHandler}/></Modal>}
             <li>
                 <Card className={styles['expense-item']}>
                     <ExpenseDate date={props.date}/>
@@ -55,4 +54,4 @@ const ExpenseItem = (props: any) => {
     )
 }
 
-export default ExpenseItem;
+export default Expense;

@@ -1,13 +1,13 @@
-import './ExpensesFilter.css'
+import styles from './ListFilter.module.css'
 
-const ExpensesFilter = (props: any) => {
+const ListFilter = (props: any) => {
     const dropdownChangeHandler = (event: any) => {
         props.onChangeFilter(event.target.value);
     };
     return (
-        <div className='expenses-filter'>
-            <div className="expenses-filter__control">
-                <label>Filter by year</label>
+        <div className={styles['expenses-filter']}>
+            <div className={styles['expenses-filter__control']}>
+                <label>Filter By Year</label>
                 <select value={props.selected} onChange={dropdownChangeHandler}>
                     <option value="2023">2023</option>
                     <option value="2022">2022</option>
@@ -19,4 +19,4 @@ const ExpensesFilter = (props: any) => {
     );
 }
 
-export default ExpensesFilter;
+export default ListFilter;

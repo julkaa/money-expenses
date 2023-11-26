@@ -6,22 +6,6 @@
 
 .new-expense button {
     font: inherit;
-    cursor: pointer;
-    padding: 1rem 2rem;
-    border: 1px solid #52796F;
-    border-radius: 12px;
-    margin-right: 1rem;
-}
-
-.new-expense button.alternative {
-    color: #220131;
-    border-color: transparent;
-    background-color: transparent;
-}
-
-.new-expense button.alternative:hover,
-.new-expense button.alternative:active {
-    background-color: #ddb3f8;
 }
 
 .new-expense__controls {
@@ -30,6 +14,10 @@
     gap: 1rem;
     margin-bottom: 1rem;
     text-align: left;
+}
+
+.new-expense__control {
+    width: 100%;
 }
 
 .new-expense__control label {
@@ -42,8 +30,8 @@
     padding: 0.5rem;
     border-radius: 6px;
     border: 1px solid #ccc;
-    width: 20rem;
     max-width: 100%;
+    background-color: white;
 }
 
 .input {
@@ -53,14 +41,15 @@
 }
 
 .new-expense__actions {
-    text-align: right;
+    display: flex;
+    justify-content: space-between;
 }
 
 .save-btn {
-    color: white;
-    background-color: #2F3E46;
+    background-color: #2F3E46 !important;
 }
 
 .cancel-btn {
-    background-color: #CAD2C5;
+    color: black !important;
+    background-color: #CAD2C5 !important;
 }

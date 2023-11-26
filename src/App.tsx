@@ -19,6 +19,7 @@ function App() {
                         <Route element={<PrivateRoutes/>}>
                             <Route path={"/list"} element={<HomePage/>}/>
                             <Route path={"/list/edit/:id"} element={<HomePage/>}/>
+                            <Route path={"/list/create-expense"} element={<HomePage/>}/>
                         </Route>
 
                         {/* Public Routes */}

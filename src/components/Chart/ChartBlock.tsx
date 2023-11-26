@@ -1,14 +1,13 @@
 import React from 'react';
-
 import ChartBar from './ChartBar';
-import './Chart.css';
+import styles from './ChartBlock.module.css';
 
-const Chart = (props: any) => {
+const ChartBlock = (props: any) => {
     const dataPointValues = props.dataPoints.map((dataPoint: any) => dataPoint.value);
     const totalMaximum = Math.max(...dataPointValues);
 
     return (
-        <div className='chart'>
+        <div className={styles.chart}>
             {props.dataPoints.map((dataPoint: any) => (
                 <ChartBar
                     key={dataPoint.label}
@@ -21,4 +20,4 @@ const Chart = (props: any) => {
     );
 };
 
-export default Chart;
+export default ChartBlock;

@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
-import Expenses from "../Expenses/Expenses";
+import ExpensesBlock from "../Expenses/ExpensesBlock";
 
 import styles from './HomePage.module.css'
 import Header from "../Header/Header";
-import {DEFAULT_EXPENSES} from "../../shared/fetchExpense";
 
 function HomePage() {
-    const [expenses, setExpense] = useState(DEFAULT_EXPENSES);
+    const mutatedExpenses = JSON.parse(localStorage.getItem('expenses')).map(item => {
+        item.date = new Date(item.date);
+        return item;
+    })
+    const [expenses, setExpense] = useState(mutatedExpenses);
     const addExpenseHandler = (expense) => {
 
         setExpense(prevExpenses => {
@@ -20,7 +23,7 @@ function HomePage() {
             {/*<PostDetails><p>Haha Modal</p></PostDetails>*/}
             <header className={styles['App-header']} color="primary">
                 {/*<NewExpense onAddExpense={addExpenseHandler}/>*/}
-                <Expenses items={expenses}/>
+                <ExpensesBlock items={expenses}/>
             </header>
 
         </div>

@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import styles from './Form.module.css'
-import {InputAdornment, OutlinedInput, TextField} from "@mui/material";
+import {Button, InputAdornment, OutlinedInput, TextField} from "@mui/material";
 
 const Form = (props: any) => {
     const [isEditing, setIsEditing] = useState(false);
     const [enteredTitle, setEnteredTitle] = useState(props.item.title || '');
     const [enteredAmount, setEnteredAmount] = useState(props.item.amount || '');
     const [enteredDate, setEnteredDate] = useState(props.item.date || '');
-    console.log(props);
+    console.log(String(props.item.date));
     const titleChangeHandler = (event: any) => {
         setEnteredTitle(event.target.value);
     }
@@ -15,6 +15,8 @@ const Form = (props: any) => {
         setEnteredAmount(event.target.value);
     }
     const dateChangeHandler = (event: any) => {
+        console.log(event.target.value);
+        console.log(typeof event.target.value);
         setEnteredDate(event.target.value);
     }
 
@@ -48,7 +50,6 @@ const Form = (props: any) => {
                         <TextField
                             className={styles.input}
                             variant="outlined"
-                            margin="normal"
                             required
                             fullWidth
                             value={enteredTitle}
@@ -62,19 +63,26 @@ const Form = (props: any) => {
                             id="outlined-adornment-amount"
                             startAdornment={<InputAdornment position="start">$</InputAdornment>}
                             required
+                            fullWidth
                             value={enteredAmount}
                             onChange={amountChangeHandler}
                         />
                     </div>
                     <div className={styles['new-expense__control']}>
                         <label>Date</label>
-                        <input type="date" min="2020-01-01" max="2023-09-01" value={enteredDate}
-                               onChange={dateChangeHandler}/>
+                        <TextField
+                            type="date"
+                            value='2023-11-01'
+                            fullWidth
+                            onChange={dateChangeHandler}/>
                     </div>
                 </div>
                 <div className={styles['new-expense__actions']}>
-                    <button type='button' className={styles['cancel-btn']} onClick={props.onCancel}>Cancel</button>
-                    <button type="submit" className={styles['save-btn']} onClick={props.onSave}>Save</button>
+                    <Button type="submit"
+                            variant="contained" className={styles['cancel-btn']}
+                            onClick={props.onCancel}>Cancel</Button>
+                    <Button type="submit"
+                            variant="contained" className={styles['save-btn']} onClick={props.onSubmit}>Save</Button>
                 </div>
             </form>
         </div>

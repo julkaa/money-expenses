@@ -1,4 +1,4 @@
-import Chart from "../Chart/Chart";
+import ChartBlock from "../Chart/ChartBlock";
 
 export const ExpensesChart = (props: any) => {
     const chartDataPoints = [
@@ -22,7 +22,7 @@ export const ExpensesChart = (props: any) => {
     }
 
     return (
-        <Chart dataPoints={chartDataPoints}/>
+        <ChartBlock dataPoints={chartDataPoints}/>
     );
 };
 
