@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
 import {ThemeProvider} from "@mui/material";
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import theme from "./muiTheme/muiTheme";
+import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
 import {AuthProvider} from "./Hooks/useContext";
 import PrivateRoutes from "./Router/PrivateRoutes";
 import LoginPage from "./components/LoginPage/LoginPage";
 import HomePage from "./components/HomePage/HomePage";
 import {Provider} from "react-redux";
 import store from "./redux/expense.reducer";
+import theme from "./theme/theme";
 
 function App() {
 
@@ -27,7 +27,7 @@ function App() {
 
                             {/* Public Routes */}
                             <Route path="/login" element={<LoginPage/>}/>
-                            <Route path="*" element={'not found'}/>
+                            <Route path="*" element={<Navigate to="/list" replace={true}/>}/>
                         </Routes>
                     </Router>
                 </ThemeProvider>

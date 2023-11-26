@@ -20,9 +20,7 @@ function HomePage() {
     return (
         <div>
             <Header/>
-            {/*<PostDetails><p>Haha Modal</p></PostDetails>*/}
             <header className={styles['App-header']} color="primary">
-                {/*<NewExpense onAddExpense={addExpenseHandler}/>*/}
                 <ExpensesBlock items={expenses}/>
             </header>
 

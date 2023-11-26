@@ -26,23 +26,15 @@ const Expense = (props: any) => {
     }
 
     function onDeleteExpense() {
-// Retrieve existing data from localStorage
         const existingExpenses = JSON.parse(localStorage.getItem('expenses') || '[]');
 
-        // Find the index of the item to delete
         const expenseIndex = existingExpenses.findIndex(
             (expense: any) => expense.id === props.id
         );
 
         if (expenseIndex !== -1) {
-            // Remove the item from the array
             existingExpenses.splice(expenseIndex, 1);
-
-            // Update localStorage with the modified array
             localStorage.setItem('expenses', JSON.stringify(existingExpenses));
-            console.log(`Expense with ID ${props.id} deleted.`);
-        } else {
-            console.log('Expense not found');
         }
         window.location.reload();
     }

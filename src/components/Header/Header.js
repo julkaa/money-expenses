@@ -1,22 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import styles from './Header.module.css'
 import {Button} from "@mui/material";
 import {useAuth} from "../../Hooks/useContext";
 import Modal from "../UI/Modal";
 import Form from "../UI/Form";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const Header = () => {
     const {toggleLogin} = useAuth();
     const navigate = useNavigate();
-    const location = useLocation();
     const [showModal, setShowModal] = useState(false);
-
-    useEffect(() => {
-        if (location.pathname === '/list/create-expense') {
-            setShowModal(true);
-        }
-    }, [location.pathname]);
 
     const handleNewExpense = () => {
         navigate('/list/create-expense');
@@ -42,7 +35,7 @@ const Header = () => {
                     type="submit"
                     variant="contained"
                     onClick={handleNewExpense}
-                    className={styles.btn}
+                    color='primary'
                 >
                     Add New Expenses
                 </Button>
@@ -50,6 +43,7 @@ const Header = () => {
                     type="submit"
                     variant="contained"
                     className={styles['btn-logout']}
+                    color='primary'
                     onClick={handleLogout}
                 >
                     Log Out

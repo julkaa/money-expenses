@@ -10,21 +10,42 @@ const Form = (props: any) => {
     const [enteredTitle, setEnteredTitle] = useState(props.item.title || '');
     const [enteredAmount, setEnteredAmount] = useState(props.item.amount || '');
     const [enteredDate, setEnteredDate] = useState(convertDate(props.item.date) || '');
+    const [titleError, setTitleError] = useState(false);
+    const [amountError, setAmountError] = useState(false);
+    const [dateError, setDateError] = useState(false);
+
     const location = useLocation();
     const dispatch = useDispatch();
-    const titleChangeHandler = (event: any) => {
+
+    const titleChangeHandler = (event) => {
         setEnteredTitle(event.target.value);
+        setTitleError(false); // Reset error when input changes
     }
-    const amountChangeHandler = (event: any) => {
+    const amountChangeHandler = (event) => {
         setEnteredAmount(event.target.value);
+        setAmountError(false); // Reset error when input changes
     }
-    const dateChangeHandler = (event: any) => {
+    const dateChangeHandler = (event) => {
         setEnteredDate(event.target.value);
+        setDateError(false); // Reset error when input changes
     }
 
-    const submitHandler = (event: any) => {
+    const submitHandler = (event) => {
         event.preventDefault();
         const existingExpenses = JSON.parse(localStorage.getItem('expenses') || '[]');
+
+        if (!enteredTitle.trim()) {
+            setTitleError(true);
+            return;
+        }
+        if (!enteredAmount.trim()) {
+            setAmountError(true);
+            return;
+        }
+        if (!enteredDate.trim()) {
+            setDateError(true);
+            return;
+        }
 
         const expenseData = {
             id: props.item.id ? props.item.id : existingExpenses.length,
@@ -35,7 +56,7 @@ const Form = (props: any) => {
 
         if (location.pathname === '/list/create-expense') {
             dispatch(addExpense(expenseData));
-        } else {
+        } else if (location.pathname === `/list/edit/${props.item.id}`) {
             dispatch(updateExpense(expenseData));
         }
         props.onCancel();
@@ -47,33 +68,37 @@ const Form = (props: any) => {
             <form onSubmit={submitHandler}>
                 <div className={styles['new-expense__controls']}>
                     <div className={styles['new-expense__control']}>
-                        <label>Title</label>
+                        <label>Title<span className={styles.required}>*</span></label>
                         <TextField
                             className={styles.input}
                             variant="outlined"
                             required
                             fullWidth
+                            error={titleError}
                             value={enteredTitle}
                             onChange={titleChangeHandler}
                         />
                     </div>
                     <div className={styles['new-expense__control']}>
-                        <label>Amount</label>
+                        <label>Amount<span className={styles.required}>*</span></label>
                         <OutlinedInput
                             className={styles.input}
                             id="outlined-adornment-amount"
                             startAdornment={<InputAdornment position="start">$</InputAdornment>}
                             required
                             fullWidth
+                            error={amountError}
                             value={enteredAmount}
                             onChange={amountChangeHandler}
                         />
                     </div>
                     <div className={styles['new-expense__control']}>
-                        <label>Date</label>
+                        <label>Date<span className={styles.required}>*</span></label>
                         <TextField
                             type="date"
                             fullWidth
+                            required
+                            error={dateError}
                             onChange={dateChangeHandler}
                             value={enteredDate}
                             inputProps={{
@@ -85,10 +110,10 @@ const Form = (props: any) => {
                 </div>
                 <div className={styles['new-expense__actions']}>
                     <Button
-                        variant="contained" className={styles['cancel-btn']}
+                        variant="contained" color='secondary'
                         onClick={props.onCancel}>Cancel</Button>
-                    <Button type="submit"
-                            variant="contained" className={styles['save-btn']} onClick={submitHandler}>Save</Button>
+                    <Button type="submit" color='primary'
+                            variant="contained">Save</Button>
                 </div>
             </form>
         </div>

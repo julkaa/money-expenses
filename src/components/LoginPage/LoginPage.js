@@ -105,6 +105,7 @@ function LoginPage() {
                         type="submit"
                         fullWidth
                         variant="contained"
+                        color='primary'
                         className={styles['sign-btn']}
                     >
                         Sign In

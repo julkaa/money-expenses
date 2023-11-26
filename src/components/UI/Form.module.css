@@ -45,11 +45,6 @@
     justify-content: space-between;
 }
 
-.save-btn {
-    background-color: #2F3E46 !important;
-}
-
-.cancel-btn {
-    color: black !important;
-    background-color: #CAD2C5 !important;
+.required {
+    color: red;
 }
