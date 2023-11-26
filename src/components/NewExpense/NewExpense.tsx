@@ -8,7 +8,7 @@ const NewExpense = (props: any) => {
             ...enteredExpenseData,
             id: Math.random().toString(),
         };
-        props.onAddExpense(expenseData);
+        console.log(expenseData);
     }
 
     const startEditingHandler = () => {

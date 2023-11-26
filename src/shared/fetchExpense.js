@@ -1,25 +1,25 @@
 const DEFAULT_EXPENSES = [
     {
-        id: 'e1',
+        id: '0',
         title: 'Watch',
         amount: 94.12,
-        date: new Date(2020, 7, 14),
+        date: new Date(2021, 7, 14),
     },
     {
-        id: 'e2',
+        id: '1',
         title: 'Book',
         amount: 69.99,
         date: new Date(2023, 7, 31),
     },
-    {id: 'e3', title: 'New TV', amount: 799.49, date: new Date(2023, 6, 12)},
+    {id: '2', title: 'New TV', amount: 799.49, date: new Date(2023, 6, 12)},
     {
-        id: 'e4',
+        id: '3',
         title: 'Car Insurance',
         amount: 294.67,
         date: new Date(2023, 2, 28),
     },
     {
-        id: 'e5',
+        id: '4',
         title: 'New Desk (Wooden)',
         amount: 450,
         date: new Date(2021, 5, 12),

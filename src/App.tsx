@@ -7,28 +7,32 @@ import {AuthProvider} from "./Hooks/useContext";
 import PrivateRoutes from "./Router/PrivateRoutes";
 import LoginPage from "./components/LoginPage/LoginPage";
 import HomePage from "./components/HomePage/HomePage";
+import {Provider} from "react-redux";
+import store from "./redux/expense.reducer";
 
 function App() {
 
     return (
-        <AuthProvider>
-            <ThemeProvider theme={theme}>
-                <Router>
-                    <Routes>
-                        {/* Private Routes */}
-                        <Route element={<PrivateRoutes/>}>
-                            <Route path={"/list"} element={<HomePage/>}/>
-                            <Route path={"/list/edit/:id"} element={<HomePage/>}/>
-                            <Route path={"/list/create-expense"} element={<HomePage/>}/>
-                        </Route>
+        <Provider store={store}>
+            <AuthProvider>
+                <ThemeProvider theme={theme}>
+                    <Router>
+                        <Routes>
+                            {/* Private Routes */}
+                            <Route element={<PrivateRoutes/>}>
+                                <Route path={"/list"} element={<HomePage/>}/>
+                                <Route path={"/list/edit/:id"} element={<HomePage/>}/>
+                                <Route path={"/list/create-expense"} element={<HomePage/>}/>
+                            </Route>
 
-                        {/* Public Routes */}
-                        <Route path="/login" element={<LoginPage/>}/>
-                        <Route path="*" element={'not found'}/>
-                    </Routes>
-                </Router>
-            </ThemeProvider>
-        </AuthProvider>
+                            {/* Public Routes */}
+                            <Route path="/login" element={<LoginPage/>}/>
+                            <Route path="*" element={'not found'}/>
+                        </Routes>
+                    </Router>
+                </ThemeProvider>
+            </AuthProvider>
+        </Provider>
     );
 }
 

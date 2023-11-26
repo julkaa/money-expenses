@@ -1,35 +1,45 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {configureStore, createSlice} from "@reduxjs/toolkit";
 
-const initialState: { expenses: any[] } =
-    {
-        expenses: [{}]
-    };
+const storedExpenses = JSON.parse(localStorage.getItem('expenses')) || [];
+
+const initialState = {
+    expenses: storedExpenses,
+};
+
 const expenseSlice = createSlice({
     name: 'expenses',
     initialState,
     reducers: {
-        addTask: (state, {payload}: { payload: any }) => {
-            state.expenses.push(payload)
-            console.log(payload);
+        addExpense: (state, {payload}: { payload: any }) => {
+            state.expenses.push(payload);
         },
-        deleteTask: (state, {payload}: { payload: any }) => {
-            const index = state.expenses.findIndex(element => element.id === payload.id);
+        deleteExpense: (state, {payload}: { payload: any }) => {
+            state.expenses = state.expenses.filter(
+                (expense: any) => expense.id !== payload.id
+            );
+        },
+        updateExpense: (state, {payload}: { payload: any }) => {
+            const index = state.expenses.findIndex(
+                (expense: any) => expense.id === payload.id
+            );
             if (index !== -1) {
-                state.expenses = state.expenses.filter(element => element.id !== payload.id)
-                return
+                state.expenses[index] = payload;
             }
-
         },
-        updateTask: (state, {payload}: { payload: any }) => {
-            let index = state.expenses.findIndex(task => task.id === payload.id)
-            if (index === -1) {
-                console.error('update task error: task was not found')
-                return
-            }
-            state.expenses[index] = payload
-        }
-    }
-})
+    },
+});
 
-export const {addTask, deleteTask, updateTask} = expenseSlice.actions;
-export default expenseSlice.reducer;
+export const {addExpense, deleteExpense, updateExpense} = expenseSlice.actions;
+
+export const store = configureStore({
+    reducer: {expenses: expenseSlice.reducer},
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck: false,
+    })
+})
+store.subscribe(() => {
+    const state = store.getState();
+    localStorage.setItem('expenses', JSON.stringify(state.expenses.expenses));
+});
+
+export default store;
