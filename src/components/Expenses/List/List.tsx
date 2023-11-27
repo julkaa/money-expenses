@@ -1,5 +1,5 @@
 import styles from './List.module.css'
-import Expense from "./Expense";
+import Expense from "../Expense";
 import React from "react";
 
 const List = (props: any) => {

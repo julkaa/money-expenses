@@ -26,10 +26,10 @@ const DEFAULT_EXPENSES = [
     },
 ];
 
-function fetchExpenses() {
+function setExpenses() {
     if (!localStorage.getItem('expenses')?.length) {
         localStorage.setItem('expenses', JSON.stringify(DEFAULT_EXPENSES));
     }
 }
 
-export {fetchExpenses, DEFAULT_EXPENSES}
+export {setExpenses, DEFAULT_EXPENSES}

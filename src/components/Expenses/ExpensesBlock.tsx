@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import Card from "../UI/Card";
-import ListFilter from "./ListFilter";
-import List from "./List";
-import ExpensesChart from "./ExpensesChart";
+import ListFilter from "./List/ListFilter";
+import List from "./List/List";
+import ExpensesChart from "../Chart/ExpensesChart";
 import styles from './ExpensesBlock.module.css'
 
 const ExpensesBlock = (props: any) => {

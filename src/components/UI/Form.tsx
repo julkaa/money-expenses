@@ -38,7 +38,7 @@ const Form = (props: any) => {
             setTitleError(true);
             return;
         }
-        if (!enteredAmount.trim()) {
+        if (!enteredAmount) {
             setAmountError(true);
             return;
         }
@@ -48,7 +48,7 @@ const Form = (props: any) => {
         }
 
         const expenseData = {
-            id: props.item.id ? props.item.id : existingExpenses.length,
+            id: props.item.id ? props.item.id.toString() : existingExpenses.length.toString(),
             title: enteredTitle,
             amount: +enteredAmount,
             date: new Date(enteredDate),

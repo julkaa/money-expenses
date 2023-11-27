@@ -1,4 +1,4 @@
-import ChartBlock from "../Chart/ChartBlock";
+import ChartBlock from "./ChartBlock";
 
 export const ExpensesChart = (props: any) => {
     const chartDataPoints = [

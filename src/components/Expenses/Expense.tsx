@@ -4,14 +4,16 @@ import Card from "../UI/Card";
 import {Button} from "@mui/material";
 import Modal from "../UI/Modal";
 import Form from "../UI/Form";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import styles from './Expense.module.css'
+import {deleteExpense} from "../../redux/expense.reducer";
+import {useDispatch} from "react-redux";
 
 const Expense = (props: any) => {
     const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
     const id = useParams();
-    const location = useLocation();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (id && !showModal) {
@@ -26,16 +28,7 @@ const Expense = (props: any) => {
     }
 
     function onDeleteExpense() {
-        const existingExpenses = JSON.parse(localStorage.getItem('expenses') || '[]');
-
-        const expenseIndex = existingExpenses.findIndex(
-            (expense: any) => expense.id === props.id
-        );
-
-        if (expenseIndex !== -1) {
-            existingExpenses.splice(expenseIndex, 1);
-            localStorage.setItem('expenses', JSON.stringify(existingExpenses));
-        }
+        dispatch(deleteExpense(props));
         window.location.reload();
     }
 

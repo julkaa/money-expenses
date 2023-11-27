@@ -1,12 +1,12 @@
 import React, {useState} from "react";
-import styles from './Header.module.css'
+import styles from './HeaderButtons.module.css'
 import {Button} from "@mui/material";
 import {useAuth} from "../../Hooks/useContext";
 import Modal from "../UI/Modal";
 import Form from "../UI/Form";
 import {useNavigate} from "react-router-dom";
 
-const Header = () => {
+const HeaderButtons = () => {
     const {toggleLogin} = useAuth();
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
@@ -53,4 +53,4 @@ const Header = () => {
     )
 }
 
-export default Header;
+export default HeaderButtons;
