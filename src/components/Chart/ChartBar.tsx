@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from './ChartBar.module.css';
 
-interface IChartBarProps {
+export interface IChartBar {
     value: number;
-    maxValue: number;
+    maxValue?: number;
     label: string;
 }
 
-const ChartBar: React.FC<IChartBarProps> = ({label, value, maxValue}) => {
+const ChartBar: React.FC<IChartBar> = ({label, value, maxValue}) => {
     let barFillHeight = '0%';
 
     if (maxValue > 0) {

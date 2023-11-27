@@ -1,7 +1,8 @@
 import styles from './List.module.css';
 import Expense from '../Expenses/Expense';
 import React from 'react';
-import {IExpenseItem, IExpensesBlock} from "../Expenses/ExpensesBlock";
+import {IExpensesBlock} from "../Expenses/ExpensesBlock";
+import {IExpenseItem} from "../HomePage/HomePage";
 
 const List: React.FC<IExpensesBlock> = (props) => {
     if (props.items.length === 0) {

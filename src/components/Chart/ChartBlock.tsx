@@ -1,14 +1,9 @@
 import React from 'react';
 import styles from './ChartBlock.module.css';
-import ChartBar from './ChartBar';
-
-interface IDataPoint {
-    value: number;
-    label: string;
-}
+import ChartBar, {IChartBar} from './ChartBar';
 
 interface IChartBlockProps {
-    dataPoints: IDataPoint[];
+    dataPoints: IChartBar[];
 }
 
 const ChartBlock: React.FC<IChartBlockProps> = ({dataPoints}) => {

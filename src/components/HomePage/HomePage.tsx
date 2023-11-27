@@ -5,11 +5,11 @@ import {useDispatch} from 'react-redux';
 import {fetchExpense} from '../../redux/expense.reducer';
 import HeaderButtons from '../Header/HeaderButtons';
 
-interface IExpenseItem {
+export interface IExpenseItem {
     id: string;
     title: string;
     amount: number;
-    date: Date;
+    date: any;
 }
 
 const HomePage: React.FC = () => {

@@ -3,11 +3,12 @@ import ExpenseDate from "./ExpenseDate";
 import Card from "../UI/Card";
 import {Button} from "@mui/material";
 import Modal from "../UI/Modal";
-import Form, {IExpenseItem} from "../UI/Form";
+import Form from "../UI/Form";
 import {useNavigate, useParams} from "react-router-dom";
 import styles from './Expense.module.css'
 import {deleteExpense} from "../../redux/expense.reducer";
 import {useDispatch} from "react-redux";
+import {IExpenseItem} from "../HomePage/HomePage";
 
 const Expense: React.FC<IExpenseItem> = (props: IExpenseItem) => {
     const [showModal, setShowModal] = useState(false);

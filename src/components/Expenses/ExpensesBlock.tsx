@@ -4,13 +4,9 @@ import Card from "../UI/Card";
 import ListFilter from "../List/ListFilter";
 import List from "../List/List";
 import ExpensesChart from "../Chart/ExpensesChart";
+import {IExpense} from "../../shared/setExpenses";
+import {IExpenseItem} from "../HomePage/HomePage";
 
-export interface IExpenseItem {
-    id: string;
-    title: string;
-    amount: number;
-    date: any;
-}
 
 export interface IExpensesBlock {
     items: IExpenseItem[];
@@ -23,7 +19,7 @@ const ExpensesBlock: React.FC<IExpensesBlock> = ({items}) => {
         setFilteredYear(selectedYear);
     };
 
-    const filteredExpenses = items.filter((expense: IExpenseItem) => {
+    const filteredExpenses = items.filter((expense: IExpense) => {
         return new Date(expense.date).getFullYear().toString() === filteredYear;
     });
 

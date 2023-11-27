@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './ListFilter.module.css';
 
-interface ListFilterProps {
+interface IListFilterProps {
     selected: string;
     onChangeFilter: (value: string) => void;
 }
 
-const ListFilter: React.FC<ListFilterProps> = ({selected, onChangeFilter}) => {
+const ListFilter: React.FC<IListFilterProps> = ({selected, onChangeFilter}) => {
     const dropdownChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
         onChangeFilter(event.target.value);
     };

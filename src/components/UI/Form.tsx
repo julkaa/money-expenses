@@ -5,16 +5,10 @@ import {useLocation} from "react-router-dom";
 import {convertDate, getTodayDate} from "../../shared/DateAdapter";
 import {useDispatch} from "react-redux";
 import {addExpense, updateExpense} from "../../redux/expense.reducer";
-
-export interface IExpenseItem {
-    id: string;
-    title: string;
-    amount: string | number;
-    date: any;
-}
+import {IExpense} from "../../shared/setExpenses";
 
 interface IFormProps {
-    item?: IExpenseItem;
+    item?: IExpense;
     onCancel: () => void;
 }
 
@@ -44,7 +38,7 @@ const Form: React.FC<IFormProps> = ({item, onCancel}) => {
 
     const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const existingExpenses: IExpenseItem[] = JSON.parse(localStorage.getItem('expenses') || '[]');
+        const existingExpenses: IExpense[] = JSON.parse(localStorage.getItem('expenses') || '[]');
 
         if (!enteredTitle.trim()) {
             setTitleError(true);
@@ -59,7 +53,7 @@ const Form: React.FC<IFormProps> = ({item, onCancel}) => {
             return;
         }
 
-        const expenseData: IExpenseItem = {
+        const expenseData: IExpense = {
             id: item?.id ? item.id.toString() : existingExpenses.length.toString(),
             title: enteredTitle,
             amount: +enteredAmount,

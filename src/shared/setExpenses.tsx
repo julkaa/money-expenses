@@ -2,7 +2,7 @@ export interface IExpense {
     id: string;
     title: string;
     amount: string | number;
-    date: string | Date;
+    date: string | Date | any;
 }
 
 const DEFAULT_EXPENSES: IExpense[] = [
