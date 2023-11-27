@@ -1,38 +1,50 @@
 import React, {useState} from "react";
-import styles from './Form.module.css'
+import styles from './Form.module.css';
 import {Button, InputAdornment, OutlinedInput, TextField} from "@mui/material";
 import {useLocation} from "react-router-dom";
 import {convertDate, getTodayDate} from "../../shared/DateAdapter";
 import {useDispatch} from "react-redux";
 import {addExpense, updateExpense} from "../../redux/expense.reducer";
 
-const Form = (props: any) => {
-    const [enteredTitle, setEnteredTitle] = useState(props.item.title || '');
-    const [enteredAmount, setEnteredAmount] = useState(props.item.amount || '');
-    const [enteredDate, setEnteredDate] = useState(convertDate(props.item.date) || '');
-    const [titleError, setTitleError] = useState(false);
-    const [amountError, setAmountError] = useState(false);
-    const [dateError, setDateError] = useState(false);
+export interface IExpenseItem {
+    id: string;
+    title: string;
+    amount: string | number;
+    date: any;
+}
+
+interface IFormProps {
+    item?: IExpenseItem;
+    onCancel: () => void;
+}
+
+const Form: React.FC<IFormProps> = ({item, onCancel}) => {
+    const [enteredTitle, setEnteredTitle] = useState<string>(item?.title || '');
+    const [enteredAmount, setEnteredAmount] = useState<string | number>(item?.amount || '');
+    const [enteredDate, setEnteredDate] = useState<string | Date>(convertDate(item?.date) || '');
+    const [titleError, setTitleError] = useState<boolean>(false);
+    const [amountError, setAmountError] = useState<boolean>(false);
+    const [dateError, setDateError] = useState<boolean>(false);
 
     const location = useLocation();
     const dispatch = useDispatch();
 
-    const titleChangeHandler = (event) => {
+    const titleChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEnteredTitle(event.target.value);
-        setTitleError(false); // Reset error when input changes
+        setTitleError(false);
     }
-    const amountChangeHandler = (event) => {
+    const amountChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEnteredAmount(event.target.value);
-        setAmountError(false); // Reset error when input changes
+        setAmountError(false);
     }
-    const dateChangeHandler = (event) => {
+    const dateChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEnteredDate(event.target.value);
-        setDateError(false); // Reset error when input changes
+        setDateError(false);
     }
 
-    const submitHandler = (event) => {
+    const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const existingExpenses = JSON.parse(localStorage.getItem('expenses') || '[]');
+        const existingExpenses: IExpenseItem[] = JSON.parse(localStorage.getItem('expenses') || '[]');
 
         if (!enteredTitle.trim()) {
             setTitleError(true);
@@ -42,13 +54,13 @@ const Form = (props: any) => {
             setAmountError(true);
             return;
         }
-        if (!enteredDate.trim()) {
+        if (!enteredDate || enteredDate.toString().trim() === '') {
             setDateError(true);
             return;
         }
 
-        const expenseData = {
-            id: props.item.id ? props.item.id.toString() : existingExpenses.length.toString(),
+        const expenseData: IExpenseItem = {
+            id: item?.id ? item.id.toString() : existingExpenses.length.toString(),
             title: enteredTitle,
             amount: +enteredAmount,
             date: new Date(enteredDate),
@@ -56,10 +68,11 @@ const Form = (props: any) => {
 
         if (location.pathname === '/list/create-expense') {
             dispatch(addExpense(expenseData));
-        } else if (location.pathname === `/list/edit/${props.item.id}`) {
+        } else if (location.pathname === `/list/edit/${item.id}`) {
             dispatch(updateExpense(expenseData));
         }
-        props.onCancel();
+
+        onCancel();
         window.location.reload();
     };
 
@@ -111,7 +124,7 @@ const Form = (props: any) => {
                 <div className={styles['new-expense__actions']}>
                     <Button
                         variant="contained" color='secondary'
-                        onClick={props.onCancel}>Cancel</Button>
+                        onClick={onCancel}>Cancel</Button>
                     <Button type="submit" color='primary'
                             variant="contained">Save</Button>
                 </div>

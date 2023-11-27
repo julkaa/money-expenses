@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import styles from './LoginPage.module.css';
 import {
     Button,
     Container,
@@ -10,24 +11,22 @@ import {
     TextField
 } from '@mui/material';
 import axios from 'axios';
-import styles from './LoginPage.module.css'
-import {useAuth} from "../../Hooks/useContext";
-import {useNavigate} from "react-router-dom";
-import {setExpenses} from "../../shared/setExpenses";
+import {useAuth} from '../../Hooks/useContext';
+import {useNavigate} from 'react-router-dom';
+import {setExpenses} from '../../shared/setExpenses';
 
-function LoginPage() {
+const LoginPage: React.FC = () => {
     const [username, setUsername] = useState('username');
     const [password, setPassword] = useState('password');
-    const {toggleLogin, isLoggedIn} = useAuth();
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
-
-    const [showPassword, setShowPassword] = React.useState(false);
+    const {toggleLogin} = useAuth();
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-    const handleMouseDownPassword = (event) => {
+    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
             const response = await axios.post('http://localhost:4000/login', {
@@ -39,7 +38,6 @@ function LoginPage() {
                 setExpenses();
                 navigate('/list');
             }
-
         } catch (error) {
             console.error('Error during login:', error);
         }
@@ -105,7 +103,7 @@ function LoginPage() {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        color='primary'
+                        color="primary"
                         className={styles['sign-btn']}
                     >
                         Sign In

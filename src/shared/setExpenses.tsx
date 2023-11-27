@@ -1,4 +1,11 @@
-const DEFAULT_EXPENSES = [
+export interface IExpense {
+    id: string;
+    title: string;
+    amount: string | number;
+    date: string | Date;
+}
+
+const DEFAULT_EXPENSES: IExpense[] = [
     {
         id: '0',
         title: 'Watch',
@@ -32,4 +39,4 @@ function setExpenses() {
     }
 }
 
-export {setExpenses, DEFAULT_EXPENSES}
+export {setExpenses, DEFAULT_EXPENSES};

@@ -1,8 +1,13 @@
 import {configureStore, createSlice} from "@reduxjs/toolkit";
+import {IExpenseItem} from "../components/UI/Form";
 
-const storedExpenses = JSON.parse(localStorage.getItem('expenses')) || [];
+interface ExpensesState {
+    expenses: IExpenseItem[];
+}
 
-const initialState = {
+const storedExpenses: IExpenseItem[] = JSON.parse(localStorage.getItem('expenses') || '[]');
+
+const initialState: ExpensesState = {
     expenses: storedExpenses,
 };
 
@@ -10,20 +15,19 @@ const expenseSlice = createSlice({
     name: 'expenses',
     initialState,
     reducers: {
-        fetchExpense: (state, {payload}) => {
+        fetchExpense: (state, {payload}: { payload: IExpenseItem[] }) => {
             state.expenses = payload;
         },
-        addExpense: (state, {payload}) => {
+        addExpense: (state, {payload}: { payload: IExpenseItem }) => {
             state.expenses.push(payload);
             state.expenses = sortExpense(state.expenses);
         },
-        deleteExpense: (state, {payload}) => {
+        deleteExpense: (state, {payload}: { payload: IExpenseItem }) => {
             state.expenses = state.expenses.filter(
                 (expense) => expense.id !== payload.id
             );
-            console.log(state.expenses)
         },
-        updateExpense: (state, {payload}) => {
+        updateExpense: (state, {payload}: { payload: IExpenseItem }) => {
             const index = state.expenses.findIndex(
                 (expense) => expense.id === payload.id
             );
@@ -37,7 +41,7 @@ const expenseSlice = createSlice({
 
 export const {addExpense, deleteExpense, updateExpense, fetchExpense} = expenseSlice.actions;
 
-function sortExpense(expenses) {
+function sortExpense(expenses: IExpenseItem[]): IExpenseItem[] {
     return expenses.slice().sort((a, b) => b.date - a.date);
 }
 
@@ -48,7 +52,6 @@ export const store = configureStore({
             serializableCheck: false,
         }),
 });
-
 
 store.subscribe(() => {
     const state = store.getState();

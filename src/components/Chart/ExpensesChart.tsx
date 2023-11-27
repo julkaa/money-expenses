@@ -2,7 +2,7 @@ import React from "react";
 import ChartBlock from "./ChartBlock";
 
 interface IExpense {
-    date: Date;
+    date: any;
     amount: number;
 }
 

@@ -1,38 +1,40 @@
 import React, {useState} from "react";
-import styles from './HeaderButtons.module.css'
+import styles from './HeaderButtons.module.css';
 import {Button} from "@mui/material";
 import {useAuth} from "../../Hooks/useContext";
 import Modal from "../UI/Modal";
 import Form from "../UI/Form";
 import {useNavigate} from "react-router-dom";
 
-const HeaderButtons = () => {
+const HeaderButtons: React.FC = () => {
     const {toggleLogin} = useAuth();
     const navigate = useNavigate();
-    const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState<boolean>(false);
 
     const handleNewExpense = () => {
         navigate('/list/create-expense');
         setShowModal(true);
     };
+
     const handleLogout = () => {
         toggleLogin();
     };
 
-    function editHandler() {
-        closeHandler();
-    }
-
-    function closeHandler() {
+    const closeHandler = () => {
         setShowModal(false);
         navigate('/list');
-    }
+    };
 
     return (
-        <>{showModal && <Modal><Form item={[]} onCancel={closeHandler} onSubmit={editHandler}/></Modal>}
+        <>
+            {showModal && (
+                <Modal>
+                    <Form onCancel={closeHandler}/>
+                </Modal>
+            )}
             <div className={styles.header}>
                 <Button
-                    type="submit"
+                    type="button"
                     variant="contained"
                     onClick={handleNewExpense}
                     color='primary'
@@ -40,7 +42,7 @@ const HeaderButtons = () => {
                     Add New Expenses
                 </Button>
                 <Button
-                    type="submit"
+                    type="button"
                     variant="contained"
                     className={styles['btn-logout']}
                     color='primary'
@@ -50,7 +52,7 @@ const HeaderButtons = () => {
                 </Button>
             </div>
         </>
-    )
-}
+    );
+};
 
 export default HeaderButtons;

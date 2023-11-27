@@ -1,9 +1,14 @@
-import styles from './ExpenseDate.module.css'
+import React from "react";
+import styles from './ExpenseDate.module.css';
 
-const ExpenseDate = (props: any) => {
-    const day = props.date.toLocaleString('en-US', {day: '2-digit'});
-    const month = props.date.toLocaleString('en-US', {month: 'long'});
-    const year = props.date.getFullYear();
+interface IExpenseDateProps {
+    date: Date;
+}
+
+const ExpenseDate: React.FC<IExpenseDateProps> = ({date}) => {
+    const day = date.toLocaleString('en-US', {day: '2-digit'});
+    const month = date.toLocaleString('en-US', {month: 'long'});
+    const year = date.getFullYear();
 
     return (
         <div className={styles['expense-date']}>
@@ -11,7 +16,7 @@ const ExpenseDate = (props: any) => {
             <div className={styles['expense-date__year']}>{year}</div>
             <div className={styles['expense-date__day']}>{day}</div>
         </div>
-    )
-}
+    );
+};
 
 export default ExpenseDate;

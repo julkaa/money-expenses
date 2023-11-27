@@ -1,18 +1,29 @@
 import React, {useState} from "react";
+import styles from './ExpensesBlock.module.css';
 import Card from "../UI/Card";
-import ListFilter from "./List/ListFilter";
-import List from "./List/List";
+import ListFilter from "../List/ListFilter";
+import List from "../List/List";
 import ExpensesChart from "../Chart/ExpensesChart";
-import styles from './ExpensesBlock.module.css'
 
-const ExpensesBlock = (props: any) => {
-    const [filteredYear, setFilteredYear] = useState('2023');
+export interface IExpenseItem {
+    id: string;
+    title: string;
+    amount: number;
+    date: any;
+}
+
+export interface IExpensesBlock {
+    items: IExpenseItem[];
+}
+
+const ExpensesBlock: React.FC<IExpensesBlock> = ({items}) => {
+    const [filteredYear, setFilteredYear] = useState<string>('2023');
 
     const filterChangeHandler = (selectedYear: string) => {
         setFilteredYear(selectedYear);
     };
 
-    const filteredExpenses = props.items.filter((expense: any) => {
+    const filteredExpenses = items.filter((expense: IExpenseItem) => {
         return new Date(expense.date).getFullYear().toString() === filteredYear;
     });
 
@@ -22,7 +33,7 @@ const ExpensesBlock = (props: any) => {
             <ExpensesChart expenses={filteredExpenses}/>
             <List items={filteredExpenses}/>
         </Card>
-    )
-}
+    );
+};
 
 export default ExpensesBlock;
