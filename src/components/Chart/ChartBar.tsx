@@ -1,11 +1,17 @@
 import React from 'react';
 import styles from './ChartBar.module.css';
 
-const ChartBar = (props: any) => {
+interface IChartBarProps {
+    value: number;
+    maxValue: number;
+    label: string;
+}
+
+const ChartBar: React.FC<IChartBarProps> = ({label, value, maxValue}) => {
     let barFillHeight = '0%';
 
-    if (props.maxValue > 0) {
-        barFillHeight = Math.round((props.value / props.maxValue) * 100) + '%';
+    if (maxValue > 0) {
+        barFillHeight = Math.round((value / maxValue) * 100) + '%';
     }
 
     return (
@@ -16,7 +22,7 @@ const ChartBar = (props: any) => {
                     style={{height: barFillHeight}}
                 ></div>
             </div>
-            <div className={styles['chart-bar__label']}>{props.label}</div>
+            <div className={styles['chart-bar__label']}>{label}</div>
         </div>
     );
 };
